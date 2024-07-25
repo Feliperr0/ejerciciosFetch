@@ -7,11 +7,13 @@ function obtenerInformacionColombia() {
       .then(response => response.json())
       .then(data => {
         // Crear un div para mostrar la información
+        console.log(data)
         const divContenedor = document.createElement("div");
         divContenedor.innerHTML = `
           <h2>Información sobre Colombia</h2>
           <p>Nombre: ${data.name}</p>
-          <p>Capital: ${data.capital}</p>
+          <p>Description: ${data.description}</p>
+          <p>Capital: ${data.stateCapital}</p>
           <p>Población: ${data.population}</p>
           <!-- Agrega más detalles según la estructura de datos que devuelve la API -->
         `;
@@ -27,4 +29,3 @@ function obtenerInformacionColombia() {
   // Llama a la función para obtener la información de Colombia
   obtenerInformacionColombia();
 
-console.log(data)
