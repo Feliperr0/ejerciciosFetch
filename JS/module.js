@@ -5,7 +5,7 @@ import {obtenerInformacionColombia, obtenerDepartamentos} from "./main.js"
 
 const contenedorTarjetas = document.getElementById('containerId');
 const contenedorInfo = document.getElementById("contenedor")
-const searchInput = document.getElementById('buscar');
+
 obtenerInformacionColombia()
 obtenerDepartamentos();
 

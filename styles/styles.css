@@ -4,3 +4,22 @@
     margin: 20px;
     background-color: #f9f9f9;
 }
+
+.tarjeta-ciudad {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+}
+
+.riesgo-alto {
+    background-color: blue;
+  }
+  
+  .riesgo-medio {
+    background-color: green;
+  }
+
+.img{
+    width: 50px;
+    object-fit: contain;
+}
