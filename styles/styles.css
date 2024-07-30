@@ -23,3 +23,41 @@
     width: 50px;
     object-fit: contain;
 }
+
+
+.card-fixed {
+  width: 300px;
+}
+
+#departamentos{
+  border: black solid 1px;
+  margin: 10px;
+  padding: 30px;
+  
+ 
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#contenedor{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#cajaInfo{
+  border: black solid 1px;
+  margin: 10px;
+  padding: 30px;
+}
+
+#contenedorTabla{
+  border: black solid 1px;
+  
+}

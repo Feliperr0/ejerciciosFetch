@@ -1,18 +1,12 @@
-
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 const urlCiudad = `https://api-colombia.com/api/v1/Department/${id}/cities`
 const idDepartamento = id
 
 
-// Llamar a la función para crear la tarjeta
 
 
-
-
-
-
-
+crearTarjetaDetalles(id)
 
 function crearTarjetaDetalles(data) {
     fetch(`https://api-colombia.com/api/v1/Department/${id}`)
@@ -38,7 +32,6 @@ function crearTarjetaDetalles(data) {
     detallesContainer.appendChild(tarjetaDetalles);
 }
 
-crearTarjetaDetalles(id)
 
 function crearTarjetasCiudades(idDepartamento) {
     const urlCiudades = `https://api-colombia.com/api/v1/Department/${idDepartamento}/cities`;
@@ -94,9 +87,6 @@ function crearTarjetasCiudades() {
         });
 }
 crearTarjetasCiudades()
-
-
-
 
 const buscarInput = document.getElementById('buscar');
 
