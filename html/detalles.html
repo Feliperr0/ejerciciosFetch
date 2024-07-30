@@ -31,12 +31,15 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a class="navbar-brand" href="#">INFORMACIÓN</a>
+                    <a class="navbar-brand" href="#">DEPARTAMENTOS</a>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <input type="text" id="buscar" placeholder="Buscar">
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="main.html">INICIO</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="especiesInvasivas.html">ESPECIES INVASIVAS</a>
                         </li>
@@ -44,18 +47,24 @@
 
                     </ul>
 
-                    <input type="text" id="buscar" placeholder="Buscar">
-
                 </div>
             </div>
         </nav>
 
         <div id="cajaInfo">
-            <div id="detalles"></div>
+            <div id="detalles" class="container-fluid row d-flex justify-content-center"></div>
         </div>
-        <div id="departamentos">
-        <div id="contenedor-ciudades" class="row d-flex justify-content-center"></div>
-    </div>
+        <div id="departamentos" class="row d-flex justify-content-center">
+            <div id="contenedor-ciudades" class="row d-flex justify-content-center"></div>
+        </div>
+
+
+        <footer class="bg-dark text-light py-3">
+            <div class="container text-center">
+                <p>By: FQM</p>
+            </div>
+        </footer>
+
 
         <script src="../JS/detalles.js"></script>
 </body>

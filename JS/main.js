@@ -19,7 +19,8 @@ export function obtenerInformacionColombia() {
         <p>${data.description}</p>
         <p>Capital: ${data.stateCapital}</p>
         <p>Población: ${data.population} </p>
-        <!-- Agrega más detalles según la estructura de datos que devuelve la API -->
+        <img src="https://content.r9cdn.net/rimg/dimg/34/a4/c96235ea-city-30430-177d8921835.jpg?crop=true&width=1020&height=498" alt="cholombia">
+     
       `;
 
       if (!document.contains(divContenedor)) {
@@ -92,6 +93,7 @@ function renderDepartmentos(departments) {
       <h5 class="card-header">${departamento.name}</h5>
       <div class="card-body">
         <p class="card-text">${departamento.description}</p>
+        <img class="imagen " src="https://blog.localadventures.mx/wp-content/uploads/2023/06/Screenshot_5.png" alt="colombia">
         <button class="btn-detalles btn btn-primary justify-content-center" data-id="${departamento.id}">Detalles</button>
       </div>
     `;

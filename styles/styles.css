@@ -61,3 +61,19 @@
   border: black solid 1px;
   
 }
+
+.imagen{
+  padding: 10px;
+  width: 400px;
+}
+
+#img{
+  max-width: 800px;
+
+
+}
+
+#imgDet{
+  width: 300px;
+
+}

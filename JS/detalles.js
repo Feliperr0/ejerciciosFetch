@@ -6,7 +6,9 @@ const idDepartamento = id
 
 
 
+
 crearTarjetaDetalles(id)
+crearTarjetasCiudades(idDepartamento)
 
 function crearTarjetaDetalles(data) {
     fetch(`https://api-colombia.com/api/v1/Department/${id}`)
@@ -21,93 +23,32 @@ function crearTarjetaDetalles(data) {
     detallesContainer.innerHTML = '';
 
     const tarjetaDetalles = document.createElement('div');
-    tarjetaDetalles.classList.add('tarjeta-detalles');
+    tarjetaDetalles.classList.add('tarjeta');
+        tarjetaDetalles.classList.add('card')
+        tarjetaDetalles.classList.add('container');
+        tarjetaDetalles.classList.add('row');
+        tarjetaDetalles.classList.add('col-md-12');
+        tarjetaDetalles.classList.add('card-fixed');
+        tarjetaDetalles.classList.add('m-3');
+        tarjetaDetalles.classList.add('d-flex');
+        tarjetaDetalles.classList.add('text-center');
+       
     tarjetaDetalles.innerHTML = `
-            <h2>${data.name}</h2>
-            <p>Descripción: ${data.description}</p>
-            <p class="destacado">Population: ${data.population}</p>
+            <h2 class="card-header">${data.name}</h2>
+            <div class="card-body">
+            <p>${data.description}</p>
+            <p class="destacado">Población: ${data.population}</p>
             <p>Área: ${data.surface} km²</p>
+            <img id="img" src="https://content.r9cdn.net/rimg/dimg/34/a4/c96235ea-city-30430-177d8921835.jpg?crop=true&width=1020&height=498" alt="cholombia">
+            </div>
+
         `;
 
     detallesContainer.appendChild(tarjetaDetalles);
 }
 
 
-function crearTarjetasCiudades(idDepartamento) {
-    const urlCiudades = `https://api-colombia.com/api/v1/Department/${idDepartamento}/cities`;
-
-    fetch(urlCiudades)
-        .then(response => response.json())
-        .then(data => {
-            const contenedorCiudades = document.getElementById('contenedor-ciudades');
-            contenedorCiudades.innerHTML = '';
-
-            data.forEach(ciudad => {
-                const tarjetaCiudad = document.createElement('div');
-                tarjetaCiudad.classList.add('tarjeta-ciudad');
-
-                tarjetaCiudad.innerHTML = `
-                    <h2>${ciudad.name}</h2>
-                    <p>${ciudad.description}</p>
-                `;
-
-                contenedorCiudades.appendChild(tarjetaCiudad);
-            });
-        })
-        .catch(error => {
-            console.error('Error al obtener las ciudades:', error);
-            // Aquí puedes mostrar un mensaje de error al usuario
-        });
-}
-
-
-function crearTarjetasCiudades() {
-    fetch(`https://api-colombia.com/api/v1/Department/${idDepartamento}/cities`)
-        .then(response => response.json())
-        .then(data => {
-            const departamentosContainer = document.getElementById('contenedor-ciudades');
-            departamentosContainer.innerHTML = '';
-
-            data.forEach(ciudad => {
-                const tarjeta = document.createElement('div');
-                tarjeta.classList.add('tarjeta');
-                tarjeta.innerHTML = `
-                    <h2>${ciudad.name}</h2>
-                    <p>${ciudad.description}</p>
-                    
-                `;
-
-
-
-                departamentosContainer.appendChild(tarjeta);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-crearTarjetasCiudades()
-
 const buscarInput = document.getElementById('buscar');
-
-buscarInput.addEventListener('keyup', () => {
-    const textoBuscar = buscarInput.value.toLowerCase();
-    const ciudad = document.querySelectorAll('.tarjeta');
-
-    ciudad.forEach(departamento => {
-        const nombre = departamento.querySelector('h2').textContent.toLowerCase();
-        const descripcion = departamento.querySelector('p').textContent.toLowerCase();
-
-        if (nombre.includes(textoBuscar) || descripcion.includes(textoBuscar)) {
-            departamento.style.display = 'block';
-        } else {
-            departamento.style.display = 'none';
-        }
-    });
-});
-
-
-
 function crearTarjetasCiudades() {
     fetch(`https://api-colombia.com/api/v1/Department/${idDepartamento}/cities`)
         .then(response => response.json())
@@ -117,15 +58,24 @@ function crearTarjetasCiudades() {
 
             data.forEach(ciudad => {
                 const tarjeta = document.createElement('div');
+                tarjeta.classList.add('card');
                 tarjeta.classList.add('tarjeta');
+                tarjeta.classList.add('container');
+                tarjeta.classList.add('row');
+                tarjeta.classList.add('col-md-5');
+                tarjeta.classList.add('card-fixed');
+                tarjeta.classList.add('m-3');
+                tarjeta.classList.add('d-flex');
+                tarjeta.classList.add('text-center');
+                   
                 tarjeta.innerHTML = `
-                    <h2>${ciudad.name}</h2>
-                    <p>${ciudad.description}</p>
-                    
-                `;
-
-
-
+                        <h5 class="card-header">${ciudad.name}</h5>
+                        <div class="card-body">
+                        <p>${ciudad.description}</p>
+                        <img id="imgDet" src="https://content.r9cdn.net/rimg/dimg/34/a4/c96235ea-city-30430-177d8921835.jpg?crop=true&width=1020&height=498" alt="cholombia">
+                        </div>
+            
+                    `;
                 departamentosContainer.appendChild(tarjeta);
             });
         })
@@ -133,4 +83,82 @@ function crearTarjetasCiudades() {
             console.error('Error:', error);
         });
 }
-crearTarjetasCiudades()
+
+
+
+const departamentosContainer = document.getElementById('contenedor-ciudades');
+
+// Función para filtrar y renderizar las tarjetas
+function filtrarYRenderizarCiudades(textoBusqueda) {
+    fetch(`https://api-colombia.com/api/v1/Department/${idDepartamento}/cities`)
+        .then(response => response.json())
+        .then(data => {
+            // Limpiamos el contenedor antes de renderizar las nuevas tarjetas
+            departamentosContainer.innerHTML = '';
+
+            // Filtramos las ciudades según el texto de búsqueda
+            let ciudadesFiltradas;
+            if (textoBusqueda === '') {
+                // Si el input está vacío, mostramos todas las ciudades
+                ciudadesFiltradas = data;
+            } else {
+                // Si hay texto de búsqueda, filtramos por nombre de ciudad
+                ciudadesFiltradas = data.filter(ciudad =>
+                    ciudad.name.toLowerCase().includes(textoBusqueda.toLowerCase())
+                );
+            }
+
+            // Verificamos si hay ciudades filtradas
+            if (ciudadesFiltradas.length === 0) {
+                // Si no hay resultados, mostramos un mensaje
+                const mensajeNoEncontrado = document.createElement('p');
+                mensajeNoEncontrado.textContent = 'No se encontraron elementos';
+                departamentosContainer.appendChild(mensajeNoEncontrado);
+            } else {
+                // Si hay resultados, creamos las tarjetas
+                ciudadesFiltradas.forEach(ciudad => {
+                    const tarjeta = document.createElement('div');
+                    tarjeta.classList.add('card');
+                tarjeta.classList.add('tarjeta');
+                tarjeta.classList.add('container');
+                tarjeta.classList.add('row');
+                tarjeta.classList.add('col-md-5');
+                tarjeta.classList.add('card-fixed');
+                tarjeta.classList.add('m-3');
+                tarjeta.classList.add('d-flex');
+                tarjeta.classList.add('text-center');
+                   
+                tarjeta.innerHTML = `
+                        <h5 class="card-header">${ciudad.name}</h5>
+                        <div class="card-body">
+                        <p>${ciudad.description}</p>
+                        <img id="imgDet" src="https://content.r9cdn.net/rimg/dimg/34/a4/c96235ea-city-30430-177d8921835.jpg?crop=true&width=1020&height=498" alt="cholombia">
+                        </div>
+            
+                    `;
+           
+                    departamentosContainer.appendChild(tarjeta);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Event listener para el input de búsqueda
+buscarInput.addEventListener('keyup', () => {
+    const textoBusqueda = buscarInput.value;
+    filtrarYRenderizarCiudades(textoBusqueda);
+});
+filtrarYRenderizarCiudades('');
+
+
+
+
+
+
+
+
+
+

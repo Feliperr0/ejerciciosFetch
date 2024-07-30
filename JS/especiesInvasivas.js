@@ -49,7 +49,7 @@ function actualizarTabla(data) {
   const riesgo1 = riesgo1Checkbox.checked;
   const riesgo2 = riesgo2Checkbox.checked;
 
-  let tablaHTML = '<table><thead><tr><th>Nombre</th><th>Nombre Científico</th><th>Nivel de Riesgo</th><th>Imagen</th><th>Impacto</th><th>Manejo</th></tr></thead><tbody>';
+  let tablaHTML = '<table class="text-center"><thead><tr><th>Nombre</th><th>Nombre Científico</th><th>Nivel de Riesgo</th><th>Imagen</th><th>Impacto</th><th>Manejo</th></tr></thead><tbody>';
 
   especies.forEach(especie => {
     const nombre = especie.name.toLowerCase();
