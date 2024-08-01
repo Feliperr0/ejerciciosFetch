@@ -11,62 +11,105 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+
+    <header class="sticky-top">
+        <div class="container">
+            <div class="row align-items-center justify-content-center tex">
+                <div class="col-md-4">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/1200px-Flag_of_Colombia.svg.png"
-                        alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                    COLOMBIA
-                </a>
-            </div>
-        </nav>
-
-
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a class="navbar-brand" href="#">DEPARTAMENTOS</a>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <input type="text" id="buscar" placeholder="Buscar">
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="main.html">INICIO</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="especiesInvasivas.html">ESPECIES INVASIVAS</a>
-                        </li>
-
-
-                    </ul>
+                        alt="Bandera de Colombia" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <h1>COLOMBIA</h1>
+                    <p class="lead">País de contrastes</p>
 
                 </div>
             </div>
-        </nav>
-
-        <div id="cajaInfo">
-            <div id="detalles" class="container-fluid row d-flex justify-content-center"></div>
         </div>
-        <div id="departamentos" class="row d-flex justify-content-center">
-            <div id="contenedor-ciudades" class="row d-flex justify-content-center"></div>
-        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        <footer class="bg-dark text-light py-3">
-            <div class="container text-center">
-                <p>By: FQM</p>
+                    <li class="nav-item align-content-center">
+                        <a class="nav-link" href="main.html">INICIO</a>
+                    </li>
+
+                    <li class="nav-item align-content-center">
+                        <a class="nav-link" href="especiesInvasivas.html">ESPECIES INVASIVAS</a>
+
+                    </li>
+                </ul>
+
             </div>
-        </footer>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#">INFORMACIÓN DETALLADA SOBRE:</a>
+            </div>
+        </div>
+    </nav>
+    <div id="cajaInfo">
+        <div id="detalles" class="container-fluid row d-flex justify-content-center"></div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#">CIUDADES</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item align-content-center">
+                        <input type="text" id="buscar" placeholder="Buscar ciudad...">
+                    </li>
+                    <li class="nav-item align-content-center">
+                        <input class="nav-item align-content-center  m-2" type="checkbox" id="tipoBusqueda"> Areas Naturales
+                        <input class="nav-item align-content-center m-2" type="checkbox" id="cities"> Ciudades
+                    </li>
 
 
-        <script src="../JS/detalles.js"></script>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div id="departamentos" class="row d-flex justify-content-center">
+
+
+        <div id="contenedor-ciudades" class="row d-flex justify-content-center"></div>
+        <div id="contenedor-areas" class="row d-flex justify-content-center"></div>
+    </div>
+
+    <div id="contenedorMixto"></div>
+
+
+
+
+
+    <footer class="bg-dark text-light py-3">
+        <div class="container text-center">
+            <p>By: FQM</p>
+        </div>
+    </footer>
+
+
+    <script src="../JS/detalles.js"></script>
 </body>
 
 </html>

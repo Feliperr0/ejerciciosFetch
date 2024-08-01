@@ -33,44 +33,63 @@ export function obtenerInformacionColombia() {
 }
 
 
-// Función para mostrar las tarjetas de departamentos
 
-export function obtenerDepartamentos() {
+
+export  function obtenerDepartamentos() {
   fetch('https://api-colombia.com/api/v1/Department')
     .then(response => response.json())
     .then(data => {
       const departamentosContainer = document.getElementById('departamentos');
 
-    
       if (data.length === 0) {
         const mensaje = document.createElement('div');
-        mensaje.textContent = "No se encontraron elementos"; //no funciona D:
+        mensaje.textContent = "No se encontraron elementos";
         departamentosContainer.appendChild(mensaje);
         return;
       }
 
-     
-      const filtrarDepartamentos = (searchText) => {
-        return data.filter(departamento => {
+    
+      const filterAndSortData = (searchText, sortAscending) => {
+        const filteredData = data.filter(departamento => {
           const normalizarNombre = departamento.name.toLowerCase();
-          const normalizarDescripcion = departamento.description.toLowerCase();
-          const normalizarTExto = searchText.toLowerCase();
-          return (normalizarNombre.includes(normalizarTExto) ||
-          normalizarDescripcion.includes(normalizarTExto));
+
+          const normalizarTexto = searchText.toLowerCase();
+          return (
+            normalizarNombre.includes(normalizarTexto)
+         
+          );
         });
+
+        return sortAscending
+          ? filteredData.slice().sort((a, b) => a.population - b.population) 
+          : filteredData;
       };
 
-      
-      const searchInput = document.getElementById('buscar'); 
+      const searchInput = document.getElementById('buscar');
       if (searchInput) {
         searchInput.addEventListener('keyup', () => {
-          const filteredData = filtrarDepartamentos(searchInput.value);
-          departamentosContainer.innerHTML = ''; 
-          renderDepartmentos(filteredData); 
+          const filteredAndSortedData = filterAndSortData(
+            searchInput.value,
+            sortCheckbox.checked
+          );
+          departamentosContainer.innerHTML = '';
+          renderDepartmentos(filteredAndSortedData);
         });
       }
-      
-      renderDepartmentos(data);
+
+      const sortCheckbox = document.getElementById('checkMenorMayor');
+      if (sortCheckbox) {
+        sortCheckbox.addEventListener('click', () => {
+          const filteredAndSortedData = filterAndSortData(
+            searchInput.value,
+            sortCheckbox.checked
+          );
+          departamentosContainer.innerHTML = '';
+          renderDepartmentos(filteredAndSortedData);
+        });
+      }
+
+      renderDepartmentos(filterAndSortData('', false));
     })
     .catch(error => {
       console.log('Error:', error);
@@ -93,6 +112,7 @@ function renderDepartmentos(departments) {
       <h5 class="card-header">${departamento.name}</h5>
       <div class="card-body">
         <p class="card-text">${departamento.description}</p>
+        <p class="card-text">Población: ${departamento.population}</p>
         <img class="imagen " src="https://blog.localadventures.mx/wp-content/uploads/2023/06/Screenshot_5.png" alt="colombia">
         <button class="btn-detalles btn btn-primary justify-content-center" data-id="${departamento.id}">Detalles</button>
       </div>
@@ -105,6 +125,3 @@ function renderDepartmentos(departments) {
     departamentosContainer.appendChild(tarjeta);
   });
 }
-
-
-
