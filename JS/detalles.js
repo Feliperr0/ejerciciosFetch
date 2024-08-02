@@ -1,15 +1,27 @@
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 const urlCiudad = `https://api-colombia.com/api/v1/Department/${id}/cities`
+const urlAreas = `https://api-colombia.com/api/v1/Department/${id}/naturalareas`
 const idDepartamento = id
 const departamentosContainer = document.getElementById('contenedor-ciudades');
 const areasContainer = document.getElementById('contenedor-areas');
+const checkboxCiudades = document.getElementById('ciudades');
+checkboxCiudades.addEventListener('click', ocultarMostrarCiudades);
 
 
 
 
-crearTarjetaDetalles(id)
-//crearTarjetasCiudades(idDepartamento)
+
+function ocultarMostrarCiudades() {
+    const tarjetasCiudad = document.querySelectorAll('.tarjeta-ciudad');
+    const checkbox = document.getElementById('ciudades');
+  
+    tarjetasCiudad.forEach(tarjeta => {
+      tarjeta.style.display = checkbox.checked ? 'none' : 'block';
+    });
+  }
+crearTarjetaDetalles(idDepartamento)
+
 
 
 function crearTarjetaDetalles(data) {
@@ -25,8 +37,8 @@ function crearTarjetaDetalles(data) {
     detallesContainer.innerHTML = '';
 
     const tarjetaDetalles = document.createElement('div');
-    tarjetaDetalles.classList.add('tarjeta');
     tarjetaDetalles.classList.add('card')
+    tarjetaDetalles.classList.add('tarjeta-ciudad');
     tarjetaDetalles.classList.add('container');
     tarjetaDetalles.classList.add('row');
     tarjetaDetalles.classList.add('col-md-12');
@@ -65,7 +77,7 @@ function crearTarjetasCiudades() {
             data.forEach(ciudad => {
                 const tarjeta = document.createElement('div');
                 tarjeta.classList.add('card');
-                tarjeta.classList.add('tarjeta');
+                tarjeta.classList.add('tarjeta-ciudad');
                 tarjeta.classList.add('container');
                 tarjeta.classList.add('row');
                 tarjeta.classList.add('col-md-5');
@@ -92,34 +104,34 @@ function crearTarjetasCiudades() {
 
 
 
-// Función para filtrar y renderizar las tarjetas
+
 function filtrarYRenderizarCiudades(textoBusqueda) {
     fetch(`https://api-colombia.com/api/v1/Department/${idDepartamento}/cities`)
         .then(response => response.json())
         .then(data => {
-            // Limpiamos el contenedor antes de renderizar las nuevas tarjetas
+
             departamentosContainer.innerHTML = '';
 
-            // Filtramos las ciudades según el texto de búsqueda
+
             let ciudadesFiltradas;
             if (textoBusqueda === '') {
-                // Si el input está vacío, mostramos todas las ciudades
+
                 ciudadesFiltradas = data;
             } else {
-                // Si hay texto de búsqueda, filtramos por nombre de ciudad
+
                 ciudadesFiltradas = data.filter(ciudad =>
                     ciudad.name.toLowerCase().includes(textoBusqueda.toLowerCase())
                 );
             }
 
-            // Verificamos si hay ciudades filtradas
+
             if (ciudadesFiltradas.length === 0) {
-                // Si no hay resultados, mostramos un mensaje
+
                 const mensajeNoEncontrado = document.createElement('p');
                 mensajeNoEncontrado.textContent = 'No se encontraron elementos';
                 departamentosContainer.appendChild(mensajeNoEncontrado);
             } else {
-                // Si hay resultados, creamos las tarjetas
+
                 ciudadesFiltradas.forEach(ciudad => {
                     const tarjeta = document.createElement('div');
                     tarjeta.classList.add('card');
@@ -150,7 +162,7 @@ function filtrarYRenderizarCiudades(textoBusqueda) {
         });
 }
 
-// Event listener para el input de búsqueda
+
 buscarInput.addEventListener('keyup', () => {
     const textoBusqueda = buscarInput.value;
     filtrarYRenderizarCiudades(textoBusqueda);
@@ -160,38 +172,65 @@ filtrarYRenderizarCiudades('');
 
 
 
-function crearTarjetasAreas() {
-    fetch(`https://api-colombia.com/api/v1/Department/${idDepartamento}/naturalareas`)
+const buscarAreas = document.getElementById('buscarAreas');
+const checkboxAreas = document.getElementById('areasNaturales');
+const contenedorTarjetas = document.getElementById('contenedor-tarjetas');
 
-        .then(response => response.json())
-        .then(data => {
-            areasContainer.innerHTML = '';
+// Función para crear una tarjeta
+function crearTarjeta(nombre) {
 
-            data.forEach(natural => {
-                const tarjeta = document.createElement('div');
-                tarjeta.classList.add('card');
-                tarjeta.classList.add('tarjeta');
-                tarjeta.classList.add('container');
-                tarjeta.classList.add('row');
-                tarjeta.classList.add('col-md-5');
-                tarjeta.classList.add('card-fixed');
-                tarjeta.classList.add('m-3');
-                tarjeta.classList.add('d-flex');
-                tarjeta.classList.add('text-center');
-
-                tarjeta.innerHTML = `
-                        <h5 class="card-header">${natural.name}</h5>
+  return ` 
+  <div class="card container col-md-5 row">
+  <h5 class="card-header">${nombre}</h5>
                         <div class="card-body">
+                        <p></p>
                         <img id="imgDet" src="https://content.r9cdn.net/rimg/dimg/34/a4/c96235ea-city-30430-177d8921835.jpg?crop=true&width=1020&height=498" alt="cholombia">
                         </div>
-            
-                    `;
-                    areasContainer.appendChild(tarjeta);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+                        </div>`;
 }
 
-crearTarjetasAreas(idDepartamento)
+// Función para generar las tarjetas y aplicar los filtros
+function generarTarjetas(datos) {
+  let html = '';
+
+  datos.forEach(area => {
+    if (area.naturalAreas) {
+      area.naturalAreas.forEach(naturalArea => {
+        html += crearTarjeta(naturalArea.name);
+      });
+    }
+  });
+
+  contenedorTarjetas.innerHTML = html;
+  aplicarFiltros();
+}
+
+// Función para aplicar los filtros
+function aplicarFiltros() {
+  const textoFiltro = buscarAreas.value.toLowerCase();
+  const ocultarTodas = checkboxAreas.checked;
+
+  contenedorTarjetas.querySelectorAll('.card').forEach(tarjeta => {
+    const textoTarjeta = tarjeta.textContent.toLowerCase();
+    const mostrarTarjeta = !ocultarTodas && textoTarjeta.includes(textoFiltro);
+    tarjeta.style.display = mostrarTarjeta ? 'block' : 'none';
+  });
+}
+
+// Obtener los datos de la API y generar las tarjetas
+fetch('https://api-colombia.com/api/v1/Department/1/naturalareas')
+  .then(response => response.json())
+  .then(data => {
+    if (Array.isArray(data)) {
+      generarTarjetas(data);
+    } else {
+      console.error('La respuesta de la API no es un array');
+    }
+  })
+  .catch(error => {
+    console.error('Error al obtener los datos:', error);
+  });
+
+// Eventos para los filtros
+buscarAreas.addEventListener('keyup', aplicarFiltros);
+checkboxAreas.addEventListener('click', aplicarFiltros);

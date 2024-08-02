@@ -79,8 +79,9 @@
                         <input type="text" id="buscar" placeholder="Buscar ciudad...">
                     </li>
                     <li class="nav-item align-content-center">
-                        <input class="nav-item align-content-center  m-2" type="checkbox" id="tipoBusqueda"> Areas Naturales
-                        <input class="nav-item align-content-center m-2" type="checkbox" id="cities"> Ciudades
+                       
+                   <label class="m-2" for="checkbox">Ciudades
+                        <input class="nav-item align-content-center m-2" type="checkbox" id="ciudades"></label>
                     </li>
 
 
@@ -89,14 +90,40 @@
             </div>
         </div>
     </nav>
+
+
     <div id="departamentos" class="row d-flex justify-content-center">
 
-
         <div id="contenedor-ciudades" class="row d-flex justify-content-center"></div>
-        <div id="contenedor-areas" class="row d-flex justify-content-center"></div>
-    </div>
 
-    <div id="contenedorMixto"></div>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <a class="navbar-brand" href="#">AREAS NATURALES:</a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                    <li class="nav-item align-content-center">
+                       
+                        <label class="m-2" for="checkbox">
+                             <input class="nav-item align-content-center m-2" type="text" id="buscarAreas"></label>
+                         </li>
+                         <li class="nav-item align-content-center">
+                       
+                            <label class="m-2" for="text">Areas Naturales
+                                 <input class="nav-item align-content-center m-2" type="checkbox" id="areasNaturales"></label>
+                             </li>
+                            </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div id="contenedor-tarjetas" class="row d-flex justify-content-center"></div>
+    </div>
 
 
 

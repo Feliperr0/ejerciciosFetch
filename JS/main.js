@@ -19,7 +19,7 @@ export function obtenerInformacionColombia() {
         <p>${data.description}</p>
         <p>Capital: ${data.stateCapital}</p>
         <p>Población: ${data.population} </p>
-        <img src="https://content.r9cdn.net/rimg/dimg/34/a4/c96235ea-city-30430-177d8921835.jpg?crop=true&width=1020&height=498" alt="cholombia">
+        <img src="../img/2feec4e5-2d62-4426-8131-c5b98413c0e3.jpg" alt="cholombia">
      
       `;
 
@@ -113,7 +113,7 @@ function renderDepartmentos(departments) {
       <div class="card-body">
         <p class="card-text">${departamento.description}</p>
         <p class="card-text">Población: ${departamento.population}</p>
-        <img class="imagen " src="https://blog.localadventures.mx/wp-content/uploads/2023/06/Screenshot_5.png" alt="colombia">
+        <img class="imagen " src="https://scontent.fmex3-3.fna.fbcdn.net/v/t39.30808-6/325137955_1575502666209963_7383806074385855204_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHsdBh0ldZ1w3qjRjuS71-Gh4asS-Xk5ZSHhqxL5eTllA9PFwd8hMwI-XDAAD__virx748j0yl3_---8CviPqIc&_nc_ohc=eY_EjmUFen8Q7kNvgFnA3wc&_nc_ht=scontent.fmex3-3.fna&oh=00_AYBifn60iF4Ym0WqyzyDmQEYKbzIMPBZgHtoY95uCDLVWw&oe=66B1E322" alt="colombia">
         <button class="btn-detalles btn btn-primary justify-content-center" data-id="${departamento.id}">Detalles</button>
       </div>
     `;
